@@ -1,20 +1,52 @@
+/* ============================= */
+/* Переменные тем */
+:root {
+    --bg-color: #f9f9f9;
+    --text-color: #202020;
+    --header-bg: #202020;
+    --header-text: #ffffff;
+    --link-color: inherit;
+    --form-bg: #ffffff;
+    --button-bg: #ff0000;
+    --button-hover-bg: #e50000;
+    --card-bg: #ffffff;
+    --card-shadow: rgba(0,0,0,0.1);
+}
+
+[data-theme="dark"] {
+    --bg-color: #181818;
+    --text-color: #e0e0e0;
+    --header-bg: #111111;
+    --header-text: #ffffff;
+    --link-color: inherit;
+    --form-bg: #222222;
+    --button-bg: #ff4444;
+    --button-hover-bg: #ff2222;
+    --card-bg: #222222;
+    --card-shadow: rgba(255,255,255,0.1);
+}
+
+/* ============================= */
 /* Общие стили */
 body {
     font-family: "Roboto", Arial, sans-serif;
-    background-color: #f9f9f9;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     margin: 0;
     padding: 0;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 a {
     text-decoration: none;
-    color: inherit;
+    color: var(--link-color);
 }
 
+/* ============================= */
 /* Шапка */
 header {
-    background-color: #202020;
-    color: white;
+    background-color: var(--header-bg);
+    color: var(--header-text);
     padding: 12px 24px;
     display: flex;
     align-items: center;
@@ -27,18 +59,19 @@ header h1 {
 }
 
 header a {
-    color: white;
+    color: var(--header-text);
     font-weight: bold;
 }
 
+/* ============================= */
 /* Форма добавления/удаления видео */
 form.add-video-form {
-    background: white;
+    background: var(--form-bg);
     padding: 20px;
     margin: 20px auto;
     max-width: 960px;
     border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 8px var(--card-shadow);
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
@@ -56,7 +89,7 @@ form.add-video-form input {
 form.add-video-form button {
     padding: 10px 20px;
     border: none;
-    background-color: #ff0000;
+    background-color: var(--button-bg);
     color: white;
     font-weight: bold;
     border-radius: 6px;
@@ -65,13 +98,14 @@ form.add-video-form button {
 }
 
 form.add-video-form button:hover {
-    background-color: #e50000;
+    background-color: var(--button-hover-bg);
 }
 
-/* Верхняя сетка — максимум 8 видео, 4 колонки и 2 ряда */
+/* ============================= */
+/* Верхняя сетка видео */
 .top-video-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 колонки */
+    grid-template-columns: repeat(4, 1fr);
     gap: 12px;
     padding: 20px;
     width: 100%;
@@ -85,12 +119,13 @@ form.add-video-form button:hover {
 .top-video-grid .video-card img {
     width: 100%;
     height: auto;
-    aspect-ratio: 16 / 9; /* сохраняем пропорции */
+    aspect-ratio: 16 / 9;
     display: block;
     object-fit: cover;
 }
 
-/* Нижний список — остальные видео */
+/* ============================= */
+/* Нижний список видео */
 .video-list {
     display: flex;
     flex-direction: column;
@@ -101,6 +136,16 @@ form.add-video-form button:hover {
 .video-list .video-card {
     display: flex;
     height: 120px;
+    background: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px var(--card-shadow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.video-list .video-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px var(--card-shadow);
 }
 
 .video-list .video-card img {
@@ -110,13 +155,15 @@ form.add-video-form button:hover {
     object-fit: cover;
 }
 
-/* Информация под видео */
-.video-info {
-    padding: 4px 6px; /* уменьшено расстояние */
+.video-list .video-info {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .video-info h3 {
-    margin: 0 0 2px 0; /* меньше отступ снизу */
+    margin: 0 0 2px 0;
     font-size: 14px;
 }
 
@@ -125,28 +172,13 @@ form.add-video-form button:hover {
     font-size: 12px;
 }
 
-/* Для списка видео */
-.video-list .video-info {
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
+/* ============================= */
 /* Hover эффект для карточек */
 .video-card {
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.video-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
+/* ============================= */
 /* Адаптивность */
 @media (max-width: 1024px) {
     .top-video-grid {
@@ -172,4 +204,209 @@ form.add-video-form button:hover {
     .video-list .video-info {
         padding: 8px;
     }
+}
+
+/* ============================= */
+/* Переменные тем */
+:root {
+    --bg-color: #f9f9f9;
+    --text-color: #202020;
+    --link-color: #065fd4;
+    --link-hover-color: #003e9e;
+    --author-color: #606060;
+    --video-shadow: rgba(0,0,0,0.2);
+}
+
+[data-theme="dark"] {
+    --bg-color: #181818;
+    --text-color: #e0e0e0;
+    --link-color: #3399ff;
+    --link-hover-color: #66b3ff;
+    --author-color: #aaaaaa;
+    --video-shadow: rgba(255,255,255,0.1);
+}
+
+/* ============================= */
+/* Общие стили */
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+a {
+    text-decoration: none;
+    color: var(--link-color);
+    font-weight: bold;
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: var(--link-hover-color);
+}
+
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* Видеоплеер */
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 */
+    margin-bottom: 20px;
+    box-shadow: 0 4px 20px var(--video-shadow);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    border: 0;
+}
+
+/* Название видео */
+h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 15px 0 5px 0;
+}
+
+/* Автор видео */
+.author-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.author-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #ccc;
+}
+
+.author-name {
+    font-weight: bold;
+    font-size: 16px;
+    color: var(--author-color);
+}
+
+/* Ссылка назад */
+.back-link {
+    display: inline-block;
+    margin-top: 10px;
+}
+
+/* ============================= */
+/* Кнопка переключения темы */
+.theme-toggle {
+    position: fixed;
+    top: 15px;
+    right: 20px;
+    background-color: var(--link-color);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.theme-toggle:hover {
+    background-color: var(--link-hover-color);
+}
+
+/* ============================= */
+/* Адаптивность */
+@media (max-width: 600px) {
+    .container {
+        padding: 0 10px;
+    }
+}
+
+.video-actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 20px;
+}
+
+.video-actions button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: #e0e0e0;
+    transition: background 0.2s;
+}
+
+.video-actions button:hover {
+    background-color: #d0d0d0;
+}
+
+.video-actions i {
+    font-size: 18px;
+}
+
+.comments {
+    margin-top: 30px;
+}
+
+.comment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.comment-form input.comment-author,
+.comment-form textarea.comment-text {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    resize: vertical;
+}
+
+.comment-form button.comment-submit {
+    align-self: flex-end;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    background-color: #065fd4;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.comment-form button.comment-submit:hover {
+    background-color: #003e9e;
+}
+
+.comment {
+    padding: 8px 12px;
+    background-color: #f0f0f0;
+    border-radius: 6px;
+    margin-bottom: 8px;
+}
+
+.comment strong {
+    color: #065fd4;
 }

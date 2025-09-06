@@ -1,22 +1,68 @@
+{% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-    <title>Видео</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <title>{{ video.title }} - MediaWebPlayer</title>
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
 </head>
-<body style="text-align: center; margin-top: 30px;">
-    <h2>{{ video.author }}</h2>
-    <div style="margin-top: 20px;">
-        <iframe
-            src="https://rutube.ru/play/embed/{{ video.rutube_id }}/"
-            frameborder="0"
-            allow="autoplay; fullscreen; picture-in-picture"
-            allowfullscreen
-            width="720"
-            height="405">
-        </iframe>
+<body>
+    <div class="container">
+        <div class="video-wrapper">
+            <iframe
+                src="https://rutube.ru/play/embed/{{ video.rutube_id }}/"
+                allow="autoplay; fullscreen; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <h1>{{ video.title }}</h1>
+
+        <div class="author-info">
+            <div class="author-avatar"></div>
+            <div class="author-name">{{ video.author }}</div>
+        </div>
+
+        <!-- Лайки / Дизлайки -->
+        <div class="video-actions">
+            <button id="like-btn" class="like-btn">
+                <i class="fas fa-thumbs-up"></i>
+                <span id="like-count">{{ rating.likes }}</span>
+            </button>
+
+            <button id="dislike-btn" class="dislike-btn">
+                <i class="fas fa-thumbs-down"></i>
+                <span id="dislike-count">{{ rating.dislikes }}</span>
+            </button>
+        </div>
+
+        <a href="{% url 'video_player' %}" class="back-link">← Вернуться к списку</a>
+
+        <!-- Комментарии -->
+        <div class="comments">
+            <h3>Комментарии</h3>
+
+            <form id="comment-form" class="comment-form">
+                {% csrf_token %}
+                <input type="text" name="comment_author" placeholder="Ваше имя (необязательно)" class="comment-author">
+                <textarea name="comment_text" rows="3" placeholder="Добавьте комментарий..." class="comment-text"></textarea>
+                <button type="submit" class="comment-submit">Отправить</button>
+            </form>
+
+            <div id="comment-list">
+                {% for comment in comments %}
+                <div class="comment">
+                    <strong>{{ comment.author }}:</strong>
+                    <span>{{ comment.text }}</span>
+                </div>
+                {% empty %}
+                <p>Комментариев пока нет.</p>
+                {% endfor %}
+            </div>
+        </div>
     </div>
-    <p style="margin-top:20px;">
-        <a href="{% url 'video_player' %}">← Вернуться к списку</a>
-    </p>
+    <script src="{% static 'core/js/video_comments.js' %}"></script>
+    <script src="{% static 'core/js/video_actions.js' %}"></script>
 </body>
 </html>

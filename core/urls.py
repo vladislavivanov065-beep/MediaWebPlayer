@@ -5,4 +5,6 @@ urlpatterns = [
     path("", views.home, name="home"),
     path("player/", views.video_player, name="video_player"),
     path("video/<int:pk>/", views.video_detail, name="video_detail"),
+    path('video/<int:pk>/rate/', views.video_rate_ajax, name='video_rate_ajax'),
+    path("video/<int:pk>/comment/", views.add_comment, name="add_comment"),
 ]
