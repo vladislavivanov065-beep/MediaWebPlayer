@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Видео Плеер</title>
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+</head>
+<body>
+<header>
+    <h1>MediaWebPlayer</h1>
+    <a href="{% url 'home' %}">Главная</a>
+</header>
+
+<!-- Форма добавления видео -->
+<form class="add-video-form" method="post">
+    {% csrf_token %}
+    <input type="text" name="rutube_url" placeholder="Ссылка на Rutube" required>
+    <button type="submit">Добавить</button>
+</form>
+
+<!-- Форма удаления видео по ID -->
+<form class="add-video-form" method="post" style="margin-top:10px;">
+    {% csrf_token %}
+    <input type="number" name="delete_id" placeholder="ID видео для удаления" min="1" required>
+    <button type="submit">Удалить видео</button>
+</form>
+
+<!-- Верхняя сетка — первые 8 видео, 4x2 -->
+<div class="top-video-grid">
+    {% for video in videos|slice:":8" %}
+        <div class="video-card">
+            <a href="{% url 'video_detail' video.pk %}">
+                <img src="{{ video.thumbnail|default:'https://via.placeholder.com/320x180?text=No+Preview' }}" alt="preview">
+            </a>
+            <div class="video-info">
+                <h3>{{ video.title|default:"Без названия" }}</h3>
+                <p>{{ video.author }}</p>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<!-- Остальные видео — развернутый список -->
+<div class="video-list">
+    {% for video in videos|slice:"8:" %}
+        <div class="video-card">
+            <a href="{% url 'video_detail' video.pk %}">
+                <img src="{{ video.thumbnail|default:'https://via.placeholder.com/320x180?text=No+Preview' }}" alt="preview">
+            </a>
+            <div class="video-info">
+                <h3>{{ video.title|default:"Без названия" }}</h3>
+                <p>{{ video.author }}</p>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+</body>
+</html>

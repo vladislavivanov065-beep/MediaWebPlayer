@@ -1,0 +1,12 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Главная</title>
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+</head>
+<body style="display:flex; justify-content:center; align-items:center; height:100vh; flex-direction:column;">
+    <h1 style="font-size:32px; margin-bottom:20px;">Добро пожаловать в MediaWebPlayer</h1>
+    <a href="{% url 'video_player' %}" style="padding:12px 24px; background:#ff0000; color:white; border-radius:6px; font-weight:bold; font-size:18px;">Перейти к видео</a>
+</body>
+</html>

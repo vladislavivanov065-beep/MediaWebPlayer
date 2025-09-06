@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Видео</title>
+</head>
+<body style="text-align: center; margin-top: 30px;">
+    <h2>{{ video.author }}</h2>
+    <div style="margin-top: 20px;">
+        <iframe
+            src="https://rutube.ru/play/embed/{{ video.rutube_id }}/"
+            frameborder="0"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen
+            width="720"
+            height="405">
+        </iframe>
+    </div>
+    <p style="margin-top:20px;">
+        <a href="{% url 'video_player' %}">← Вернуться к списку</a>
+    </p>
+</body>
+</html>
