@@ -19,21 +19,23 @@ A Django-based web application for managing and viewing Rutube videos with a cle
 
 ## Project Structure
 
+```text
 mediawebplayer/
 ├── core/
-│ ├── migrations/
-│ ├── models.py
-│ ├── views.py
-│ ├── static/
-│ │ └── core/
-│ │ └── css/
-│ │ └── style.css
-│ ├── templates/
-│ │ └── core/
-│ │ └── video_player.html
+│   ├── migrations/
+│   ├── models.py
+│   ├── views.py
+│   ├── static/
+│   │   └── core/
+│   │       └── css/
+│   │           └── style.css
+│   ├── templates/
+│   │   └── core/
+│   │       └── video_player.html
 ├── mediawebplayer/
-│ └── settings.py
+│   └── settings.py
 ├── manage.py
+```
 
 
 - **core/models.py:** Defines the `Video` model with fields for URL, title, author, and thumbnail.  
@@ -50,25 +52,36 @@ mediawebplayer/
 ```bash
 git clone <repository_url>
 cd mediawebplayer
+```
 
 2. Create and activate a virtual environment:
+```bash
 python -m venv venv
 # Windows
 venv\Scripts\activate
 # macOS/Linux
 source venv/bin/activate
+```
 
 3. Install dependencies:
+```bash
 pip install -r requirements.txt
+```
 
 4. Apply migrations:
+```bash
 python manage.py migrate
+```
 
 5. Run the development server:
+```bash
 python manage.py runserver
+```
 
 6. Open your browser and go to:
+```bash
 http://127.0.0.1:8000/player/
+```
 
 Usage
 
